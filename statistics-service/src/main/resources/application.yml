@@ -19,7 +19,3 @@ spring:
     properties:
       hibernate:
         show_sql: true
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8052/eureka

@@ -1,6 +1,5 @@
 package ru.test.statisticsservice.service;
 
-import com.netflix.discovery.EurekaClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
@@ -19,13 +18,10 @@ public class StatService {
     private RestTemplate restTemplate;
     @Autowired
     StatRepository repository;
-    @Autowired
-    EurekaClient eurekaClient;
 
-//    private final String usersServiceURL = "http://users-service/users";
+    private final String usersServiceURL = "http://localhost:8080/users";
 
     public Statistic countStats() {
-        String usersServiceURL = eurekaClient.getNextServerFromEureka("users-service",false).getHomePageUrl() + "/users";
         List<UserDTO> users = Arrays.stream(restTemplate.getForEntity(usersServiceURL, UserDTO[].class).getBody()).toList();
         Statistic stat = Statistic.builder()
                 .usersCount(users.size())
