@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: users-service
+#  config:
+#    import: optional:configserver:http://configserver:8051
+  h2:
+    console:
+      enabled: true
+
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password: sa
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8052/eureka
+server:
+  port: 8082
+
+
+#  spring.datasource.url=
+#  spring.datasource.driverClassName=org.h2.Driver
+#  spring.datasource.username=sa
+#  spring.datasource.password=password
+#  spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
