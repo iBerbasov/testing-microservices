@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://db:5432/berbasov_test_db
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: create
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka-url-test:8052/eureka

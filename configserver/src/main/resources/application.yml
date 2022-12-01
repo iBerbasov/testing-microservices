@@ -5,8 +5,15 @@ spring:
     name: configserver
   profiles:
     active: native
-#  cloud:
-#    config:
-#      server:
-#        native:
-#          searchLocations: classpath:/config/
+  cloud:
+    config:
+      server:
+        native:
+          searchLocations:
+            - classpath:/config
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - mappings

@@ -2,6 +2,7 @@ version: '3'
 services:
   database:
     image: postgres:14
+    container_name: "postgres"
     ports:
       - "5432:5432"
     environment:
@@ -10,23 +11,13 @@ services:
       POSTGRES_DB: "berbasov_test_db"
     networks:
       backend:
-        - aliases:
+        aliases:
             - "db"
-  configserver:
-    build: ./configserver/
-    container_name: "config"
-    ports:
-      - "8051:8051"
-    networks:
-      backend:
-        - aliases:
-            - "config-server"
-
   users-service:
     build: ./users-service/
     container_name: "users"
     ports:
-      - "8081:8081"
+      - "8082:8082"
     networks:
       - backend
     deploy:
@@ -40,7 +31,7 @@ services:
     build: ./statistics-service/
     container_name: "stats"
     ports:
-      - "8082:8082"
+      - "8081:8081"
     networks:
       - backend
     deploy:
@@ -49,8 +40,26 @@ services:
         delay: 5s
         max_attempts: 5
         window: 20s
-
-
+  eureka-server:
+    build: ./eurekaserver/
+    container_name: "eureka"
+    ports:
+      - "8052:8052"
+    networks:
+      backend:
+        aliases:
+            - "eureka-url-test"
+  configserver:
+    build: ./configserver/
+    container_name: "config"
+    ports:
+      - "8051:8051"
+    networks:
+      backend:
+        aliases:
+            - "configserver"
 networks:
   backend:
     driver: bridge
+#
+#
